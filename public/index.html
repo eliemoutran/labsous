@@ -283,6 +283,11 @@ function score(row, q) {
   }
   return s;
 }
+function count(path, title) {
+  if (typeof goatcounter === 'undefined' || !goatcounter.count) return;
+  goatcounter.count({ path, title, event: true });
+}
+let at = 0;
 function search(q) {
   out.replaceChildren();
   if (q.length < 2) return;
@@ -290,6 +295,8 @@ function search(q) {
   const ranked = jokes.map(row => ({ row, s: score(row, q) })).filter(x => x.s > 0);
   ranked.sort((a, b) => b.s - a.s);
   const results = ranked.slice(0, 10).map(x => x.row);
+  clearTimeout(at);
+  at = setTimeout(() => count('/search/' + q.toLowerCase(), q), 1000);
   render(results, !results.length);
 }
 function render(results, empty) {
@@ -334,6 +341,7 @@ function randomClip() {
   const item = clips[0];
   qEl.value = '';
   history.replaceState(null, '', location.pathname);
+  count('/random', item.title || vid);
   render(clips.slice(0, 10), false);
   play(item, 0);
 }
@@ -350,3 +358,4 @@ fetch('jokes.json').then(r => {
   if (init) { qEl.value = init; search(init.trim()); }
 }).catch(() => msg('في مشكلة، جرّب بعد شوي', true));
 </script>
+<script data-goatcounter="https://labsous.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
