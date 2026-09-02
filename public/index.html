@@ -246,8 +246,8 @@ function el(tag, text) {
   if (text != null) n.textContent = text;
   return n;
 }
-function play(r) {
-  const start = Math.max(0, r.t - 1);
+function play(r, start) {
+  if (start == null) start = Math.max(0, r.t - 1);
   player.replaceChildren();
   const f = document.createElement('iframe');
   f.src = `https://www.youtube-nocookie.com/embed/${r.video_id}?start=${start}&autoplay=1&rel=0`;
@@ -335,7 +335,7 @@ function randomClip() {
   qEl.value = '';
   history.replaceState(null, '', location.pathname);
   render(clips.slice(0, 10), false);
-  play(item);
+  play(item, 0);
 }
 form.addEventListener('submit', e => { e.preventDefault(); clearTimeout(t); search(qEl.value.trim()); });
 qEl.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => search(qEl.value.trim()), 250); });
