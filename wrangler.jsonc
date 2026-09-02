@@ -1,0 +1,10 @@
+{
+  "name": "labsous",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-09-02",
+  "assets": { "directory": "./public" },
+  "d1_databases": [{ "binding": "DB", "database_name": "labsous", "database_id": "00000000-0000-0000-0000-000000000000" }],
+  "vectorize": [{ "binding": "VEC", "index_name": "labsous-jokes", "remote": true }],
+  "ai": { "binding": "AI", "remote": true },
+  "observability": { "enabled": true }
+}

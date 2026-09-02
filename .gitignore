@@ -1,0 +1,9 @@
+node_modules
+.wrangler
+.env
+.dev.vars
+data/seed.sql
+data/vectors.ndjson
+data/raw/
+data/shards/
+NUL

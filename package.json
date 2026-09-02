@@ -1,0 +1,17 @@
+{
+  "name": "labsous",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "extract": "bun scripts/extract.ts",
+    "publish": "bun scripts/publish.ts",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "latest",
+    "typescript": "latest",
+    "wrangler": "latest"
+  }
+}
