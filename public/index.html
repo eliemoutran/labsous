@@ -8,17 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    color-scheme: dark;
-    --bg: #14161a;
-    --ink: #eceef1;
-    --mute: #9aa3ad;
-    --line: #2c323a;
-    --accent: #c4a35a;
-    --accent-2: #dbbf7a;
-    --stage: #1c2026;
-    --err: #e8a090;
-  }
-  html[data-theme="light"] {
     color-scheme: light;
     --bg: #f4f1ea;
     --ink: #1c1e22;
@@ -28,6 +17,17 @@
     --accent-2: #6e5518;
     --stage: #fffcf7;
     --err: #9c3d2e;
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #14161a;
+    --ink: #eceef1;
+    --mute: #9aa3ad;
+    --line: #2c323a;
+    --accent: #c4a35a;
+    --accent-2: #dbbf7a;
+    --stage: #1c2026;
+    --err: #e8a090;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--ink); }
@@ -227,14 +227,14 @@ let jokes = [];
 let t = 0;
 
 const theme = {
-  get() { return document.documentElement.getAttribute('data-theme') || 'dark'; },
+  get() { return document.documentElement.getAttribute('data-theme') || 'light'; },
   set(mode) {
     document.documentElement.setAttribute('data-theme', mode);
     localStorage.setItem('theme', mode);
     themeBtn.setAttribute('aria-label', mode === 'dark' ? 'تفعيل الوضع الفاتح' : 'تفعيل الوضع الداكن');
   },
 };
-theme.set(localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+theme.set(localStorage.getItem('theme') || 'light');
 themeBtn.addEventListener('click', () => theme.set(theme.get() === 'dark' ? 'light' : 'dark'));
 
 function mmss(s) {
